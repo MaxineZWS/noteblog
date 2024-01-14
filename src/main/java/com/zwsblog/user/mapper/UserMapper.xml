@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace = "com.zwsblog.user.mapper.UserMapper">
+    <select id="listByName" resultType="com.zwsblog.user.entity.User">
+        select * from user where name like concat('%',#{name},'%')
+    </select>
+
+    <insert id="add">
+        insert into user(name,age,gender) values(#{name},#{age})
+    </insert>
+
+    <update id="update">
+        update user
+        <set>
+            <if test="name!=null">
+                name = #{name},
+            </if>
+            <if test="age!=null">
+                age = #{age},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="del">
+        delete from user where id = #{id}
+    </delete>
+</mapper>
